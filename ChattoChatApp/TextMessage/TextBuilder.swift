@@ -19,6 +19,8 @@ class ViewModel: TextMessageViewModel<TextModel> {
 
 class TextBuilder: ViewModelBuilderProtocol {
     
+    let defualtBuilder = MessageViewModelDefaultBuilder()
+    
     func canCreateViewModel(fromModel decoratedTextMessage: Any) -> Bool {
         
         return decoratedTextMessage is TextModel
@@ -27,7 +29,7 @@ class TextBuilder: ViewModelBuilderProtocol {
     
     func createViewModel(_ decoratedTextMessage: TextModel) -> ViewModel {
         
-        let textMessageViewModel = ViewModel(textMessage: decoratedTextMessage, messageViewModel: MessageViewModelDefaultBuilder().createMessageViewModel(decoratedTextMessage))
+        let textMessageViewModel = ViewModel(textMessage: decoratedTextMessage, messageViewModel: defualtBuilder.createMessageViewModel(decoratedTextMessage))
         
         return textMessageViewModel
         

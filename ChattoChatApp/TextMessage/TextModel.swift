@@ -12,11 +12,20 @@ import ChattoAdditions
     
 class TextModel: TextMessageModel<MessageModel> {
 
-    static let  chatItemType = "text"
+    static let chatItemType = "text"
     
     override init(messageModel: MessageModel, text: String) {
     
         super.init(messageModel: messageModel, text: text)
     
+    }
+    
+    var status: MessageStatus {
+        get {
+            return self._messageModel.status
+        }
+        set {
+            self._messageModel.status = newValue
+        }
     }
 }
