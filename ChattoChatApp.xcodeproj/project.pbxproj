@@ -29,13 +29,13 @@
 		C3A79FBB1F8F9EE400DE70D0 /* Decorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A79FBA1F8F9EE400DE70D0 /* Decorator.swift */; };
 		C3A79FBD1F8FA0F700DE70D0 /* TextBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A79FBC1F8FA0F700DE70D0 /* TextBuilder.swift */; };
 		C3BC404A1F99E5F600B119D3 /* Me.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BC40491F99E5F600B119D3 /* Me.swift */; };
-		C3BC44121F9E2BEE00B119D3 /* TimeSeparatorPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BC440F1F9E2BEE00B119D3 /* TimeSeparatorPresenter.swift */; };
-		C3BC44131F9E2BEE00B119D3 /* TimeSeparatorCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BC44101F9E2BEE00B119D3 /* TimeSeparatorCollectionViewCell.swift */; };
-		C3BC44141F9E2BEE00B119D3 /* TimeSeparatorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BC44111F9E2BEE00B119D3 /* TimeSeparatorModel.swift */; };
 		C3BC441A1F9E31BF00B119D3 /* SendingStatusCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3BC44171F9E31BE00B119D3 /* SendingStatusCollectionViewCell.xib */; };
 		C3BC441B1F9E31BF00B119D3 /* SendingStatusCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BC44181F9E31BE00B119D3 /* SendingStatusCollectionViewCell.swift */; };
 		C3BC441C1F9E31BF00B119D3 /* SendingStatusPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BC44191F9E31BF00B119D3 /* SendingStatusPresenter.swift */; };
 		C3BC441F1F9E360700B119D3 /* avatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BC441E1F9E360700B119D3 /* avatar.swift */; };
+		C3DFC81A1F9E49E20019EA96 /* TimeSeparatorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3DFC8171F9E49E10019EA96 /* TimeSeparatorModel.swift */; };
+		C3DFC81B1F9E49E20019EA96 /* TimeSeparatorPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3DFC8181F9E49E10019EA96 /* TimeSeparatorPresenter.swift */; };
+		C3DFC81C1F9E49E20019EA96 /* TimeSeparatorCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3DFC8191F9E49E10019EA96 /* TimeSeparatorCollectionViewCell.swift */; };
 		D6B29E03A203AFF6499E4A59 /* Pods_ChattoChatApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E178FB10665C97432C3DFF1C /* Pods_ChattoChatApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -66,13 +66,13 @@
 		C3A79FBA1F8F9EE400DE70D0 /* Decorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Decorator.swift; sourceTree = "<group>"; };
 		C3A79FBC1F8FA0F700DE70D0 /* TextBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextBuilder.swift; sourceTree = "<group>"; };
 		C3BC40491F99E5F600B119D3 /* Me.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Me.swift; sourceTree = "<group>"; };
-		C3BC440F1F9E2BEE00B119D3 /* TimeSeparatorPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSeparatorPresenter.swift; sourceTree = "<group>"; };
-		C3BC44101F9E2BEE00B119D3 /* TimeSeparatorCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSeparatorCollectionViewCell.swift; sourceTree = "<group>"; };
-		C3BC44111F9E2BEE00B119D3 /* TimeSeparatorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSeparatorModel.swift; sourceTree = "<group>"; };
 		C3BC44171F9E31BE00B119D3 /* SendingStatusCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SendingStatusCollectionViewCell.xib; sourceTree = "<group>"; };
 		C3BC44181F9E31BE00B119D3 /* SendingStatusCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendingStatusCollectionViewCell.swift; sourceTree = "<group>"; };
 		C3BC44191F9E31BF00B119D3 /* SendingStatusPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendingStatusPresenter.swift; sourceTree = "<group>"; };
 		C3BC441E1F9E360700B119D3 /* avatar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = avatar.swift; sourceTree = "<group>"; };
+		C3DFC8171F9E49E10019EA96 /* TimeSeparatorModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeSeparatorModel.swift; sourceTree = "<group>"; };
+		C3DFC8181F9E49E10019EA96 /* TimeSeparatorPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeSeparatorPresenter.swift; sourceTree = "<group>"; };
+		C3DFC8191F9E49E10019EA96 /* TimeSeparatorCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeSeparatorCollectionViewCell.swift; sourceTree = "<group>"; };
 		E178FB10665C97432C3DFF1C /* Pods_ChattoChatApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChattoChatApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -199,9 +199,9 @@
 		C3BC44151F9E2C1E00B119D3 /* Time Separator */ = {
 			isa = PBXGroup;
 			children = (
-				C3BC44101F9E2BEE00B119D3 /* TimeSeparatorCollectionViewCell.swift */,
-				C3BC44111F9E2BEE00B119D3 /* TimeSeparatorModel.swift */,
-				C3BC440F1F9E2BEE00B119D3 /* TimeSeparatorPresenter.swift */,
+				C3DFC8191F9E49E10019EA96 /* TimeSeparatorCollectionViewCell.swift */,
+				C3DFC8171F9E49E10019EA96 /* TimeSeparatorModel.swift */,
+				C3DFC8181F9E49E10019EA96 /* TimeSeparatorPresenter.swift */,
 			);
 			name = "Time Separator";
 			path = "New Group";
@@ -361,25 +361,25 @@
 			files = (
 				C312ED9C1F97985D00AFD255 /* SignInViewController.swift in Sources */,
 				C3A79FBD1F8FA0F700DE70D0 /* TextBuilder.swift in Sources */,
-				C3BC44131F9E2BEE00B119D3 /* TimeSeparatorCollectionViewCell.swift in Sources */,
 				C3BC441F1F9E360700B119D3 /* avatar.swift in Sources */,
 				C3A79FA11F8F829F00DE70D0 /* ChatLogController.swift in Sources */,
-				C3BC44141F9E2BEE00B119D3 /* TimeSeparatorModel.swift in Sources */,
 				C31156D51F96607A00D3C45E /* PhotoHandler.swift in Sources */,
 				C3A79F9F1F8F829F00DE70D0 /* AppDelegate.swift in Sources */,
-				C3BC44121F9E2BEE00B119D3 /* TimeSeparatorPresenter.swift in Sources */,
+				C3DFC81A1F9E49E20019EA96 /* TimeSeparatorModel.swift in Sources */,
 				C3A79FB71F8F965900DE70D0 /* DataSource.swift in Sources */,
 				C312ED9E1F97986900AFD255 /* SignUpViewController.swift in Sources */,
 				C3A79FB51F8F945C00DE70D0 /* TextModel.swift in Sources */,
 				C377C8ED1F98DFC800F0333D /* MessageTableVC.swift in Sources */,
 				C377C8EF1F98E03600F0333D /* MessageTableViewCell.swift in Sources */,
 				C3A79FB91F8F96AE00DE70D0 /* ChatItemController.swift in Sources */,
+				C3DFC81B1F9E49E20019EA96 /* TimeSeparatorPresenter.swift in Sources */,
 				C3BC441B1F9E31BF00B119D3 /* SendingStatusCollectionViewCell.swift in Sources */,
 				C312EDA11F97A02100AFD255 /* Helpers.swift in Sources */,
 				C31156D11F965B9E00D3C45E /* PhotoModel.swift in Sources */,
 				C3A79FBB1F8F9EE400DE70D0 /* Decorator.swift in Sources */,
 				C31156D31F965E3700D3C45E /* PhotoBuilder.swift in Sources */,
 				C3BC404A1F99E5F600B119D3 /* Me.swift in Sources */,
+				C3DFC81C1F9E49E20019EA96 /* TimeSeparatorCollectionViewCell.swift in Sources */,
 				C31156CC1F96551E00D3C45E /* TextHandler.swift in Sources */,
 				C3BC441C1F9E31BF00B119D3 /* SendingStatusPresenter.swift in Sources */,
 			);
