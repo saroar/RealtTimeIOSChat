@@ -33,25 +33,23 @@ class SignUpViewController: UIViewController {
     
     @IBAction func singUp(_ sender: Any) {
     
-        guard let email = email.text, let password = password.text, let fullname = fullname.text else { return }
-    
-        Auth.auth().createUser(withEmail: email, password: password) { [ weak self ] (user, error) in
-
+        guard let email = email.text, let password = password.text, let fullname = fullname.text else {return}
+        
+        Auth.auth().createUser(withEmail: email, password: password) { [weak self] (user, error) in
             if let error = error {
+                
                 self?.alert(message: error.localizedDescription)
                 return
             }
-            
             Database.database().reference().child("Users").child(user!.uid).updateChildValues(["email": email, "name": fullname])
             let changeRequest = user!.createProfileChangeRequest()
             changeRequest.displayName = fullname
             changeRequest.commitChanges(completion: nil)
             
+            let table = self?.storyboard?.instantiateViewController(withIdentifier: "table") as! MessageTableVC
+            self?.navigationController?.show(table, sender: nil)
         }
-        
-        let table = self.storyboard?.instantiateViewController(withIdentifier: "table") as! MessageTableVC
-        self.navigationController?.show(table, sender: nil)
-    
+
     }
     
 }

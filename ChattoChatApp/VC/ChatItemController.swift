@@ -16,7 +16,7 @@ class ChatItemController: NSObject {
     
     var initialMessages = [ChatItemProtocol]()
     var items = [ChatItemProtocol]()
-    var totalMessages = [ChatItemProtocol]()
+
     var loadMore = false
     var userUID: String!
     typealias completeLoading = () -> Void
@@ -33,12 +33,11 @@ class ChatItemController: NSObject {
     func insertItem(message: ChatItemProtocol) {
         
         self.items.append(message)
-        self.totalMessages.append(message)
     
     }
 
     func loadPrevious(completion: @escaping completeLoading) {
-        Database.database().reference().child("User-messages").child(Me.uid).child(userUID).queryEnding(atValue: nil, childKey: self.items.first?.uid).queryLimited(toLast: 51).observeSingleEvent(of: .value, with: { [ weak self ] (snapshot) in
+        Database.database().reference().child("User-messages").child(Me.uid).child(userUID).queryEnding(atValue: nil, childKey: self.items.first!.uid).queryLimited(toLast: 52).observeSingleEvent(of: .value, with: { [ weak self ] (snapshot) in
             
             var msgs = Array(JSON(snapshot.value as Any).dictionaryValue.values).sorted(by: {(lhs, rhs) -> Bool in
                 return lhs["date"].doubleValue < rhs["date"].doubleValue
@@ -53,6 +52,12 @@ class ChatItemController: NSObject {
             }
             
             completion()
+            
+            msgs.filter({ (msg) -> Bool in
+                return msg["type"].stringValue == PhotoModel.chatItemType
+            }).forEach({ (msg) in
+                self?.parseURLs(UID_URL: (key: msg["uid"].stringValue, value: msg["image"].stringValue))
+            })
         })
     }
     

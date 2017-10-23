@@ -20,6 +20,12 @@ class DataSource: ChatDataSourceProtocol {
         self.controller.initialMessages = initialMessages
         self.controller.userUID = uid
         self.controller.loadIntoItemArray(neededMsg: min(initialMessages.count, 50), moreToLoad: initialMessages.count > 50)
+         NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(updateLoadingPhoto),
+            name: NSNotification.Name(rawValue: "updateImage"),
+            object: nil
+        )
     }
     
     var hasMoreNext: Bool {
@@ -84,5 +90,44 @@ class DataSource: ChatDataSourceProtocol {
     
     }
     
+    func updatePhotoMessage(uid: String, status: MessageStatus) {
+        
+        if let index = self.controller.items.index(where: { (msg) -> Bool in
+            
+            return msg.uid == uid
+            
+        }) {
+            
+            let message = self.controller.items[index] as! PhotoModel
+            message.status = status
+            self.delegate?.chatDataSourceDidUpdate(self)
+            
+        }
+        
+    }
+    
+    @objc func updateLoadingPhoto(notification: NSNotification) {
+        let info = notification.userInfo as! [String: Any]
+        let image = info["image"] as! UIImage
+        let uid = info["uid"] as! String
+        
+        if let index = self.controller.items.index(where: { (msg) -> Bool in
+            
+            return msg.uid == uid
+            
+        }) {
+            
+            let item = self.controller.items[index] as! PhotoModel
+            let model = MessageModel(uid: item.uid, senderId: item.senderId, type: item.type, isIncoming: false, date: item.date, status: item.status)
+            let photoMessage = PhotoModel(messageModel: model, imageSize: image.size, image: image)
+            self.controller.items[index] = photoMessage
+            self.delegate?.chatDataSourceDidUpdate(self)
+            
+        }
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "updateImage"), object: nil)
+    }
 
 }

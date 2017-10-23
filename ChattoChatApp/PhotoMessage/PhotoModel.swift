@@ -19,4 +19,13 @@ class PhotoModel: PhotoMessageModel<MessageModel> {
         super.init(messageModel: messageModel, imageSize: imageSize, image: image)
     
     }
+    
+    var status: MessageStatus {
+        get {
+            return self._messageModel.status
+        }
+        set {
+            self._messageModel.status = newValue
+        }
+    }
 }

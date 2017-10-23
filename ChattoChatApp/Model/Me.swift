@@ -11,6 +11,7 @@ import FirebaseAuth
 
 class Me {
     static var uid: String {
+        //return Auth.auth().currentUser!.uid
         return Auth.auth().currentUser!.uid
     }
 }

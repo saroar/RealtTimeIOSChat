@@ -15,7 +15,12 @@ import Chatto
 
 class MessageTableVC: UIViewController, FUICollectionDelegate, UITableViewDelegate, UITableViewDataSource {
 
-    let conteacts = FUIArray(query: Database.database().reference().child("Users").child(Me.uid).child("Contacts"))
+    let conteacts = FUISortedArray(query: Database.database().reference().child("Users").child(Me.uid).child("Contacts"), delegate: nil) { (lhs, rhs) -> ComparisonResult in
+        let lhs = Date(timeIntervalSinceReferenceDate: JSON(lhs.value as Any)["lastMessage"]["date"].doubleValue)
+        let rhs = Date(timeIntervalSinceReferenceDate: JSON(rhs.value as Any)["lastMessage"]["date"].doubleValue)
+        
+        return rhs.compare(lhs)
+    }
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -26,7 +31,12 @@ class MessageTableVC: UIViewController, FUICollectionDelegate, UITableViewDelega
         self.conteacts.delegate = self
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        Database.database().reference().child("User-message").child(Me.uid).keepSynced(true)
+        
+        tableView.rowHeight = UITableViewAutomaticDimension
+
+        
+        
+        Database.database().reference().child("User-messages").child(Me.uid).keepSynced(true)
 
     }
     
@@ -124,7 +134,7 @@ extension MessageTableVC {
     
     func array(_ array: FUICollection, didChange object: Any, at index: UInt) {
         
-        self.tableView.reloadRows(at: [IndexPath(row: Int(index), section: 0)], with: .automatic)
+        self.tableView.reloadRows(at: [IndexPath(row: Int(index), section: 0)], with: .none)
         
     }
     
@@ -135,36 +145,80 @@ extension MessageTableVC {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! MessageTableViewCell
-        let info = JSON((conteacts[(UInt(indexPath.row))] as? DataSnapshot)?.value as Any).dictionaryObject
-        cell.name.text = info?["name"] as? String
-        cell.lastMessageDate.text = nil
+        let info = JSON((conteacts[(UInt(indexPath.row))] as? DataSnapshot)?.value as Any).dictionaryValue
+        
+        cell.name.text = info["name"]?.stringValue
+        cell.lastMessage.text = info["lastMessage"]?["text"].stringValue
+        cell.lastMessageDate.text = dateFormateer(timestamp: info["lastMessage"]?["date"].double)
         
         return cell
+    
     }
+    
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let uid = (conteacts[UInt(indexPath.row)] as? DataSnapshot)?.key
-        let reference = Database.database().reference().child("User-messages").child(Me.uid).child(uid!).queryLimited(toLast: 51)
+        let uid = (conteacts[UInt(indexPath.row)] as? DataSnapshot)!.key
+        let reference = Database.database().reference().child("User-messages").child(Me.uid).child(uid).queryLimited(toLast: 51)
         self.tableView.isUserInteractionEnabled = false
         
         reference.observeSingleEvent(of: .value, with: { [ weak self ] (snapshot) in
-            let msg = Array(JSON(snapshot.value as Any).dictionaryValue.values).sorted(by: {(lhs, rhs) -> Bool in
+            let msgs = Array(JSON(snapshot.value as Any).dictionaryValue.values).sorted(by: { (lhs, rhs) -> Bool in
                 return lhs["date"].doubleValue < rhs["date"].doubleValue
             })
             
-            let converted = self!.convertToChatItemProtocal(messages: msg)
+            let converted = self!.convertToChatItemProtocal(messages: msgs)
             let chatLog = ChatLogController()
-            chatLog.userUID = uid!
-            chatLog.dataSource = DataSource(initialMessages: converted, uid: uid!)
+            chatLog.userUID = uid
+            chatLog.dataSource = DataSource(initialMessages: converted, uid: uid)
+            
+            chatLog.messageArray = FUIArray(
+                query: Database.database().reference()
+                    .child("User-messages")
+                    .child(Me.uid)
+                    .child(uid)
+                    .queryStarting(
+                        atValue: nil,
+                        childKey: converted.last?.uid
+                    ),
+                delegate: nil
+            )
+            
             self?.navigationController?.show(chatLog, sender: nil)
             self?.tableView.deselectRow(at: indexPath, animated: true)
             self?.tableView.isUserInteractionEnabled = true
+            
+            msgs.filter({ (msg) -> Bool in
+                return msg["type"].stringValue == PhotoModel.chatItemType
+            }).forEach({ (msg) in
+                self?.parseURLs(UID_URL: (key: msg["uid"].stringValue, value: msg["image"].stringValue))
+            })
+            
         })
     
     }
     
+    func dateFormateer(timestamp: Double?) -> String? {
+        if let timestamp = timestamp {
+            let date = Date(timeIntervalSinceReferenceDate: timestamp)
+            let dateFormateer = DateFormatter()
+            let timeSinceDateInSeconds = Date().timeIntervalSince(date)
+            let secondInDays: TimeInterval = 24*60*60
+            
+            if timeSinceDateInSeconds > 7 * secondInDays {
+                dateFormateer.dateFormat = "dd/MM/y"
+            } else if timeSinceDateInSeconds > secondInDays {
+                dateFormateer.dateFormat = "EEE"
+            } else {
+                dateFormateer.dateFormat = "h:mm a"
+            }
+            return dateFormateer.string(from: date)
+        } else {
+            return nil
+        }
+    }
 }
 
 

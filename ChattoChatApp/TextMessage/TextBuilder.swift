@@ -30,6 +30,7 @@ class TextBuilder: ViewModelBuilderProtocol {
     func createViewModel(_ decoratedTextMessage: TextModel) -> ViewModel {
         
         let textMessageViewModel = ViewModel(textMessage: decoratedTextMessage, messageViewModel: defualtBuilder.createMessageViewModel(decoratedTextMessage))
+            textMessageViewModel.avatarImage.value = #imageLiteral(resourceName: "avatar")
         
         return textMessageViewModel
         

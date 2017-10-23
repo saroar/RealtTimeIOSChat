@@ -31,6 +31,7 @@ class PhotoBuilder: ViewModelBuilderProtocol {
     func createViewModel(_ decoratedPhotoMessage: PhotoModel) -> photoViewModel {
     
         let photoMessageModel = photoViewModel(photoMessage: decoratedPhotoMessage, messageViewModel: defualtBuilder.createMessageViewModel(decoratedPhotoMessage))
+            photoMessageModel.avatarImage.value = #imageLiteral(resourceName: "avatar")
         
         return photoMessageModel
     
