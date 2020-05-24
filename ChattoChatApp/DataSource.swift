@@ -118,7 +118,7 @@ class DataSource: ChatDataSourceProtocol {
         }) {
             
             let item = self.controller.items[index] as! PhotoModel
-            let model = MessageModel(uid: item.uid, senderId: item.senderId, type: item.type, isIncoming: false, date: item.date, status: item.status)
+            let model = MessageModel(uid: item.uid, senderId: item.senderId, type: item.type, isIncoming: item.isIncoming, date: item.date, status: item.status)
             let photoMessage = PhotoModel(messageModel: model, imageSize: image.size, image: image)
             self.controller.items[index] = photoMessage
             self.delegate?.chatDataSourceDidUpdate(self)
